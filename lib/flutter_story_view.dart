@@ -430,7 +430,7 @@ class _FlutterStoryViewState extends State<FlutterStoryView>
                         !_videoController!.value.isInitialized) &&
                     _isVideoLoading,
                 child: Container(
-                  color: Colors.grey[600],
+                  color: Colors.black,
                   child: Center(
                     child:
                         widget.loadingIndicator ?? CircularProgressIndicator(),

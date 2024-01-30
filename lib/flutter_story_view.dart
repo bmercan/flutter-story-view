@@ -61,7 +61,7 @@ class FlutterStoryView extends StatefulWidget {
   final EdgeInsets? indicatorPadding;
 
   final Widget? overlayWidget;
-
+  //
   final Widget? loadingIndicator;
 
   FlutterStoryView({

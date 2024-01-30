@@ -4,21 +4,21 @@ version: 0.0.4
 
 license: MIT
 
-repository: https://github.com/AdnanKhan45/flutter-story-view/tree/main
-homepage: https://github.com/AdnanKhan45/flutter-story-view/blob/main/lib/flutter_story_view.dart
+repository: https://github.com/bmercan/flutter-story-view/tree/main
+homepage: https://github.com/bmercan/flutter-story-view/blob/main/lib/flutter_story_view.dart
 
 metadata:
-  author: Muhammad Adnan
+  author: B Mercan
 
 environment:
-  sdk: '>=2.19.6 <4.0.0'
+  sdk: ">=2.19.6 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  intl: ^0.19.0
+  intl: ^0.18.0
   video_player: ^2.8.2
   cached_network_image: ^3.3.1
 

@@ -392,7 +392,10 @@ class _FlutterStoryViewState extends State<FlutterStoryView>
                                 ),
                                 if (widget.createdAt != null)
                                   Text(
-                                    DateFormat.jm().format(widget.createdAt!),
+                                    DateFormat.jm().format(DateTime.parse(widget
+                                            .storyItems[currentItemIndex]
+                                            .createdAt ??
+                                        DateTime.now().toString())),
                                     style: const TextStyle(
                                         color: Colors.grey, fontSize: 11),
                                   ),

@@ -60,8 +60,6 @@ class FlutterStoryView extends StatefulWidget {
   // Padding of indicator
   final EdgeInsets? indicatorPadding;
 
-  final Widget? userCard;
-
   final Widget? overlayWidget;
 
   final Widget? loadingIndicator;
@@ -79,7 +77,6 @@ class FlutterStoryView extends StatefulWidget {
     this.indicatorValueColor,
     this.enableOnHoldHide = true,
     this.indicatorPadding = const EdgeInsets.only(top: 40.0),
-    this.userCard,
     this.overlayWidget,
     this.loadingIndicator,
   });

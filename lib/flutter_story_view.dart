@@ -57,23 +57,14 @@ class FlutterStoryView extends StatefulWidget {
 
   final bool? enableOnHoldHide;
 
-  // Back button on the top left
-  final bool? showBackIcon;
-
-  // Menu button on the top right
-  final bool? showMenuIcon;
-
-  // Show reply button
-  final bool? showReplyButton;
-
-  // Reply button text
-  final String? replyButtonText;
-
-  // Reply button functionality
-  final VoidCallback? onReplyTap;
-
   // Padding of indicator
   final EdgeInsets? indicatorPadding;
+
+  final Widget? userCard;
+
+  final Widget? overlayWidget;
+
+  final Widget? loadingIndicator;
 
   FlutterStoryView({
     required this.onComplete,
@@ -87,12 +78,10 @@ class FlutterStoryView extends StatefulWidget {
     this.indicatorColor,
     this.indicatorValueColor,
     this.enableOnHoldHide = true,
-    this.showBackIcon = true,
-    this.showMenuIcon = true,
-    this.showReplyButton = true,
-    this.replyButtonText = "Reply",
-    this.onReplyTap,
     this.indicatorPadding = const EdgeInsets.only(top: 40.0),
+    this.userCard,
+    this.overlayWidget,
+    this.loadingIndicator,
   });
 
   @override
@@ -305,6 +294,20 @@ class _FlutterStoryViewState extends State<FlutterStoryView>
               ),
             ),
 
+            if (widget.overlayWidget != null)
+              Align(
+                alignment: Alignment.topCenter,
+                child: AnimatedOpacity(
+                  duration: const Duration(milliseconds: 200),
+                  opacity: widget.enableOnHoldHide == false
+                      ? 1
+                      : !_isPaused
+                          ? 1
+                          : 0,
+                  child: widget.overlayWidget,
+                ),
+              ),
+
             /// Story indicator which plays with timer, progress and total story Items
             /// check out widget in widgets dir.
             Align(
@@ -359,15 +362,16 @@ class _FlutterStoryViewState extends State<FlutterStoryView>
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    if (widget.showBackIcon != null && widget.showBackIcon!)
+                    /* if (widget.showBackIcon != null && widget.showBackIcon!)
                       GestureDetector(
                         onTap: widget.onComplete,
                         child: const Icon(
                           Icons.arrow_back,
                         ),
-                      ),
-                    if (widget.userInfo != null) ...[
-                      const SizedBox(
+                      ), */
+                    if (widget.userCard != null) ...[
+                      widget.userCard!
+                      /*  const SizedBox(
                         width: 10,
                       ),
                       if (widget.userInfo!.profileUrl != null)
@@ -401,7 +405,7 @@ class _FlutterStoryViewState extends State<FlutterStoryView>
                             ],
                           ],
                         ),
-                      ),
+                      ), */
                     ] else
                       Expanded(child: Container()),
                     if (widget.createdAt != null)
@@ -409,13 +413,14 @@ class _FlutterStoryViewState extends State<FlutterStoryView>
                         DateFormat.jm().format(widget.createdAt!),
                         style: const TextStyle(color: Colors.grey),
                       ),
-                    if (widget.showMenuIcon != null && widget.showMenuIcon!)
-                      GestureDetector(
-                        onTap: widget.onMenuTapListener,
-                        child: const Icon(
-                          Icons.more_vert,
-                        ),
-                      )
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Icon(
+                        Icons.close,
+                      ),
+                    )
                   ],
                 ),
               ],
@@ -433,10 +438,9 @@ class _FlutterStoryViewState extends State<FlutterStoryView>
                     _isVideoLoading,
                 child: Container(
                   color: Colors.grey[600],
-                  child: const Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.teal,
-                    ),
+                  child: Center(
+                    child:
+                        widget.loadingIndicator ?? CircularProgressIndicator(),
                   ),
                 ),
               ),
@@ -536,49 +540,6 @@ class _FlutterStoryViewState extends State<FlutterStoryView>
                 ),
               )
             ],
-          ),
-        ),
-        AnimatedOpacity(
-          duration: const Duration(milliseconds: 200),
-          opacity: widget.enableOnHoldHide == false
-              ? 1
-              : !_isPaused
-                  ? 1
-                  : 0,
-          child: Container(
-            height: 100,
-            width: double.infinity,
-            color: Colors.black,
-            padding: const EdgeInsets.only(top: 10),
-            child: Column(
-              children: [
-                if (currentItemIndex == 0)
-                  if (widget.caption != null)
-                    Expanded(
-                      child: Text(
-                        widget.caption!,
-                      ),
-                    ),
-                if (widget.showReplyButton != null &&
-                    widget.showReplyButton!) ...[
-                  InkWell(
-                    onTap: widget.onReplyTap,
-                    child: Column(
-                      children: [
-                        const Icon(Icons.keyboard_arrow_up),
-                        const SizedBox(
-                          height: 3,
-                        ),
-                        Text(widget.replyButtonText!),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                ]
-              ],
-            ),
           ),
         ),
       ],

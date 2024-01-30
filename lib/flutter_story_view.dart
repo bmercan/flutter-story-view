@@ -369,50 +369,43 @@ class _FlutterStoryViewState extends State<FlutterStoryView>
                           Icons.arrow_back,
                         ),
                       ), */
-                    if (widget.userCard != null) ...[
-                      widget.userCard!
-                      /*  const SizedBox(
-                        width: 10,
-                      ),
-                      if (widget.userInfo!.profileUrl != null)
-                        Container(
-                          width: 45,
-                          height: 45,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(30),
-                            child: CachedNetworkImage(
-                              imageUrl: widget.userInfo!.profileUrl!,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      const SizedBox(
-                        width: 10,
-                      ),
+                    if (widget.userInfo != null) ...[
                       Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Row(
                           children: [
-                            if (widget.userInfo!.username != null) ...[
-                              Text(
-                                widget.userInfo!.username!,
-                                style: const TextStyle(fontSize: 16),
+                            Container(
+                              width: 45,
+                              height: 45,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(30),
+                                child: CachedNetworkImage(
+                                  imageUrl: widget.userInfo!.profileUrl!,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                              const SizedBox(
-                                height: 2,
-                              ),
-                            ],
+                            ),
+                            SizedBox(width: 10),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  widget.userInfo!.username!,
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                                if (widget.createdAt != null)
+                                  Text(
+                                    DateFormat.jm().format(widget.createdAt!),
+                                    style: const TextStyle(
+                                        color: Colors.grey, fontSize: 11),
+                                  ),
+                              ],
+                            ),
                           ],
                         ),
-                      ), */
+                      ),
                     ] else
                       Expanded(child: Container()),
-                    if (widget.createdAt != null)
-                      Text(
-                        DateFormat.jm().format(widget.createdAt!),
-                        style: const TextStyle(color: Colors.grey),
-                      ),
                     GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
